@@ -1,7 +1,7 @@
-import userRouter from "./user.js";
+import userRouter from './user.js'
 
 function routes(app) {
-  app.use("/user", userRouter);
+    app.use('/user', userRouter)
 }
 
-export default routes;
+export default routes

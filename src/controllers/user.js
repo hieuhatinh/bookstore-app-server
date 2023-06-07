@@ -1,13 +1,39 @@
+import { userRepositories } from '../repositotires/index.js'
+import HttpStatusCode from '../exceptions/HttpStatusCode.js'
+
 const login = async (req, res) => {
-  const { user, password } = req.body;
+    try {
+        const data = await userRepositories.login(req.body)
 
-  res.status(200).json({
-    message: "login successfully",
-    data: {
-      user,
-      password,
-    },
-  });
-};
+        return res.status(HttpStatusCode.OK).json({
+            message: 'login successfully',
+            data: data,
+        })
+    } catch (exception) {
+        return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+            message: exception.toString(),
+        })
+    }
+}
 
-export default { login };
+const register = async (req, res) => {
+    const { email, password, fullName } = req.body
+    try {
+        const data = await userRepositories.register({
+            email,
+            password,
+            fullName,
+        })
+
+        return res.status(HttpStatusCode.OK).json({
+            message: 'register successfully',
+            data,
+        })
+    } catch (exception) {
+        return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+            message: exception.toString(),
+        })
+    }
+}
+
+export default { login, register }
