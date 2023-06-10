@@ -36,4 +36,25 @@ const register = async (req, res) => {
     }
 }
 
-export default { login, register }
+const update = async (req, res) => {
+    const { email, password, fullName } = req.body
+
+    try {
+        const data = await userRepositories.update({
+            email,
+            password,
+            fullName,
+        })
+
+        return res.status(HttpStatusCode.OK).json({
+            message: 'Update successfully',
+            data,
+        })
+    } catch (exception) {
+        return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+            message: exception.message,
+        })
+    }
+}
+
+export default { login, register, update }

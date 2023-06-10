@@ -23,7 +23,7 @@ const login = async ({ email, password }) => {
             return {
                 ...user.toObject(),
                 token,
-                password: 'Not show'
+                password: 'Not show',
             }
         } else {
             throw new Exception(Exception.INVALID_EMAIL_PASWORD)
@@ -62,4 +62,14 @@ const register = async ({ email, password, fullName }) => {
     // print('register user in user repositories', OutputType.INFORMATION)
 }
 
-export default { login, register }
+const update = async ({ email, password, fullName }) => {
+    const user = await UserModel.findOneAndUpdate(
+        { email },
+        { password, fullName },
+        { new: true }
+    )
+
+    return user
+}
+
+export default { login, register, update }
