@@ -5,6 +5,7 @@ class Exception extends Error {
     static CONNOT_CONNECT_DB = 'Cannot connect to database'
     static USER_EXIT = 'User already exited'
     static INVALID_EMAIL_PASWORD = 'Invalid email or password'
+    static CANNOT_GET_DATA = 'Error occurs, cannot get data'
 
     constructor(message) {
         super(message)

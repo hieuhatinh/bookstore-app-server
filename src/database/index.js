@@ -12,9 +12,7 @@ async function connect() {
         print('connect mongoose successfully', OutputType.SUCCESS)
         return connection
     } catch (error) {
-        return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-            message: Exception.CANNOT_CONNECT_DB,
-        })
+        throw Exception(Exception.CANNOT_CONNECT_DB)
     }
 }
 
