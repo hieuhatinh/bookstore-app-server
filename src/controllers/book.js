@@ -24,6 +24,35 @@ const getDetailBook = async (req, res) => {
     }
 }
 
+/**
+ * @description: Add book to cart
+ * @method post
+ * @route /book/:idUser/:id
+ * @returns booksByType
+ */
+const addBookToCart = async (req, res) => {
+    const { idUser, idBook } = req.params
+    const { quantity } = req.body
+
+    try {
+        const data = await bookRepositories.addBookToCart({
+            idUser,
+            idBook,
+            quantity,
+        })
+
+        return res.status(HttpStatusCode.OK).json({
+            message: 'add book to cart successfully',
+            data,
+        })
+    } catch (error) {
+        return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+            message: error.message,
+        })
+    }
+}
+
 export default {
     getDetailBook,
+    addBookToCart,
 }

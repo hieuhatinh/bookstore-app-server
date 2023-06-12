@@ -12,7 +12,7 @@ async function connect() {
         print('connect mongoose successfully', OutputType.SUCCESS)
         return connection
     } catch (error) {
-        throw Exception(Exception.CANNOT_CONNECT_DB)
+        throw new Exception(Exception.CANNOT_CONNECT_DB)
     }
 }
 

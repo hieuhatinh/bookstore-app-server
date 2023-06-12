@@ -63,9 +63,13 @@ const register = async ({ email, password, fullName }) => {
 }
 
 const update = async ({ email, password, fullName }) => {
+    const hashPassword = await bcrypt.hash(
+        password,
+        parseInt(process.env.SALT_ROUNDS)
+    )
     const user = await UserModel.findOneAndUpdate(
         { email },
-        { password, fullName },
+        { password: hashPassword, fullName },
         { new: true }
     )
 
